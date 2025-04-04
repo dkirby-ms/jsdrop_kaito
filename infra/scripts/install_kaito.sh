@@ -70,3 +70,22 @@ inference:
   preset:
     name: "falcon-7b"
 EOF
+
+# Check if the workspace is ready for inference
+kubectl get workspace workspace-falcon-7b
+
+# Get the cluster IP to send a request to the inference service
+export CLUSTERIP=$(kubectl get \
+    svc workspace-falcon-7b \
+    -o jsonpath="{.spec.clusterIPs[0]}")
+
+# Ask the LLM a question
+export QUESTION="What is Arc Jumpstart?"
+
+kubectl run -it --rm \
+    --restart=Never \
+    curl --image=curlimages/curl \
+    -- curl -X POST http://$CLUSTERIP/chat \
+    -H "accept: application/json" \
+    -H "Content-Type: application/json" \
+    -d "{\"prompt\":\"${QUESTION}\"}" | jq
