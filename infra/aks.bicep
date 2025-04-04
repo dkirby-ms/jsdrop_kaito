@@ -2,17 +2,16 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:0.8.3
   name: 'managedClusterDeployment'
   params: {
     // Required parameters
-    name: 'csmin001'
+    name: 'controlplane'
     primaryAgentPoolProfiles: [
       {
         count: 3
         mode: 'System'
         name: 'systempool'
         vmSize: 'Standard_DS4_v2'
-        availabilityZones: [
-          1
-          3
-        ]
+        // Removed availabilityZones and added availabilitySet
+        type: 'AvailabilitySet'
+
       }
     ]
     // Non-required parameters
@@ -38,6 +37,8 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:0.8.3
         enableAutoScaling: true
         minCount: 1
         maxCount: 2
+        // Added availability set configuration for GPU pool
+        type: 'AvailabilitySet'
       }
     ]
   }

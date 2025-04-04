@@ -10,19 +10,36 @@ Before you begin, ensure you have the following:
 
 * An Azure subscription with access to Azure Kubernetes Service (AKS) and Azure Arc.
 * Available NCSv12 or other GPU quota in your Azure subscription.
+* Access to the code by cloning [the repo](https://github.com/dkirby-ms/jsdrop_kaito) to a local dev folder.
+* Azure CLI installed and logged into the Azure subscription you will use.
 
 ## Step-by-Step Guide
 
-### Step 1: Setting Up Your Environment
+### Step 1: Setting Up a Kubernetes environment with GPU
 
-1. **Create an AKS Cluster**: Deploy an AKS cluster in your Azure subscription. Ensure that the cluster is Arc-enabled.
-2. **GPU Node Configuration**: Verify that your AKS cluster has access to GPU nodes. If you encounter quota issues, request GPU quota relief through the appropriate channels.
+In this guide we will use an AKS cluster to simulate an on-premises cluster with GPU. For this guide, you will need Compute quota for 24 Standard_NCSv3 series vCPU.
+
+    - Open a Bash shell where you cloned the [GitHub repository](https://github.com/dkirby-ms/jsdrop_kaito). From the shell, run the following commands to create an Azure resource group and begin a deployment of AKS using a Bicep template.
+
+    ```
+    az group create -n JumpstartKAITO -l eastus2
+    ```
+
+    ![Az Group create screenshot](create_group.png)
+
+    ```
+    az deployment group create -g JumpstartKAITO -f infra/aks.bicep
+    ```
 
 ### Step 2: Deploying KAITO
 
-1. **Clone the KAITO Repository**: Clone the KAITO repository from GitHub to your local machine.
-2. **Install Dependencies**: Install the necessary dependencies for KAITO. This includes Docker, Kubernetes, and Helm.
-3. **Deploy KAITO**: Use Helm to deploy KAITO on your AKS cluster. Ensure that the deployment is successful and that KAITO is running smoothly.
+Next we will run the install_kaito.sh script to Arc-enable the cluster and deploy KAITO.
+
+    - From the same shell, run the install_kaito.sh script.
+
+    ```
+    ./install_kaito.sh
+    ```
 
 ### Step 3: Configuring KAITO
 

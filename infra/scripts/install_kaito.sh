@@ -2,7 +2,7 @@
 export clusterName="kaitotest"
 export resourceGroupName="kaito"
 export KAITO_WORKSPACE_VERSION=0.4.4
-export GPU_NODE_POOL_NAME="gpu"
+export GPU_NODE_POOL_NAME="gpupool"
 export namespace="kaito-workspace"
 export GPU_NODE_SIZE="Standard_NC12s_v3"
 
@@ -65,7 +65,7 @@ resource:
   instanceType: "Standard_NC12s_v3"
   labelSelector:
     matchLabels:
-      apps: gpu
+      apps: $GPU_NODE_POOL_NAME
 inference:
   preset:
     name: phi-3.5-mini-instruct
