@@ -31,10 +31,6 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:0.8.3
         osDiskSizeGB: 128
         osType: 'Linux'
         maxPods: 110
-        nodeTaints: [
-          'sku=gpu:NoSchedule'
-        ]
-        enableAutoScaling: true
         minCount: 1
         maxCount: 2
         // Added availability set configuration for GPU pool
