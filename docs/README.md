@@ -1,8 +1,8 @@
-# Arc Jumpstart Drop: Using KAITO with AKS Azure Arc
+# Exploring KAITO enabled by Azure Arc - A Jumpstat Drop
 
 ## Introduction
 
-Welcome to the Arc Jumpstart Drop for integrating KAITO with AKS Azure Arc. This guide is designed to provide a comprehensive, step-by-step approach to deploying KAITO on AKS clusters enabled by Azure Arc. Our mission is to help you get started quickly and efficiently, leveraging the power of KAITO and Azure Arc to enhance your AI and machine learning workflows.
+This guide is designed to provide a comprehensive, step-by-step approach to deploying KAITO on Kubernetes clusters enabled by Azure Arc. Our mission is to help you get started quickly and efficiently, leveraging the power of KAITO and Azure Arc to enhance your AI and machine learning workflows. In this example, we will be using an AKS cluster to emulate a locally running Kubernetes cluster with a GPU node pool.
 
 ## Prerequisites
 
