@@ -4,6 +4,7 @@ export resourceGroupName="kaito"
 export KAITO_WORKSPACE_VERSION=0.4.4
 export GPU_NODE_POOL_NAME="gpu"
 export namespace="kaito-workspace"
+export GPU_NODE_SIZE="Standard_NC12s_v3"
 
 # Prerequisite: We are starting with a pre-existing AKS cluster that has a GPU node pool of at least 2 nodes of NC12v3 SKU. This can be deployed using the included Bicep template.
 
@@ -54,4 +55,18 @@ kubectl -n $namespace wait pod \
     --timeout=300s
 
 
-
+# Deploy a workspace with GPU
+cat <<EOF | kubectl apply -f -
+apiVersion: kaito.sh/v1alpha1
+kind: Workspace
+metadata:
+  name: workspace-falcon-7b
+resource:
+  instanceType: "${GPU_NODE_SIZE}"
+  labelSelector:
+    matchLabels:
+      apps: gpu
+inference:
+  preset:
+    name: "falcon-7b"
+EOF
