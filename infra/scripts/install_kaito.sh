@@ -53,3 +53,5 @@ kubectl -n $namespace wait pod \
     -l app.kubernetes.io/instance=$namespace \
     --timeout=300s
 
+
+

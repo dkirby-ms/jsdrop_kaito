@@ -8,9 +8,8 @@ This guide is designed to provide a comprehensive, step-by-step approach to depl
 
 Before you begin, ensure you have the following:
 
-* An Azure subscription with access to AKS and Azure Arc.
-* A GPU-enabled VM in your Azure subscription.
-* Access to the CI lab tenant for testing (if applicable).
+* An Azure subscription with access to Azure Kubernetes Service (AKS) and Azure Arc.
+* Available NCSv12 or other GPU quota in your Azure subscription.
 
 ## Step-by-Step Guide
 
