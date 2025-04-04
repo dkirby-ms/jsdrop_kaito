@@ -60,19 +60,19 @@ cat <<EOF | kubectl apply -f -
 apiVersion: kaito.sh/v1alpha1
 kind: Workspace
 metadata:
-  name: workspace-falcon-7b
+  name: workspace-phi-3-5-mini
 resource:
-  instanceType: "${GPU_NODE_SIZE}"
+  instanceType: "Standard_NC12s_v3"
   labelSelector:
     matchLabels:
       apps: gpu
 inference:
   preset:
-    name: "falcon-7b"
+    name: phi-3.5-mini-instruct
 EOF
 
 # Check if the workspace is ready for inference
-kubectl get workspace workspace-falcon-7b
+kubectl get workspace workspace-phi-3-5-mini
 
 # Get the cluster IP to send a request to the inference service
 export CLUSTERIP=$(kubectl get \
@@ -80,12 +80,14 @@ export CLUSTERIP=$(kubectl get \
     -o jsonpath="{.spec.clusterIPs[0]}")
 
 # Ask the LLM a question
-export QUESTION="What is Arc Jumpstart?"
+#export QUESTION="What is Arc Jumpstart?"
 
-kubectl run -it --rm \
-    --restart=Never \
-    curl --image=curlimages/curl \
-    -- curl -X POST http://$CLUSTERIP/chat \
-    -H "accept: application/json" \
-    -H "Content-Type: application/json" \
-    -d "{\"prompt\":\"${QUESTION}\"}" | jq
+
+kubectl run -it --rm --restart=Never curl --image=curlimages/curl -- curl -X POST http://$CLUSTERIP/v1/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "phi-3.5-mini-instruct",
+    "prompt": "What is Azure Arc?",
+    "max_tokens": 20,
+    "temperature": 0
+  }'
