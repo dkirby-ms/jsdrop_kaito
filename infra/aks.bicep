@@ -10,7 +10,6 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:0.8.3
         name: 'systempool'
         vmSize: 'Standard_DS4_v2'
         // Removed availabilityZones and added availabilitySet
-        type: 'AvailabilitySet'
 
       }
     ]
@@ -34,7 +33,6 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:0.8.3
         minCount: 1
         maxCount: 2
         // Added availability set configuration for GPU pool
-        type: 'AvailabilitySet'
       }
     ]
   }
