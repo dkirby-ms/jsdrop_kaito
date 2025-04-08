@@ -19,7 +19,7 @@ Before you begin, ensure you have the following:
 
 In this guide we will use an AKS cluster to simulate an on-premises cluster with GPU. For this guide, you will need Compute quota for 24 Standard_NCSv3 series vCPU.
 
-    - Open a Bash shell where you cloned the [GitHub repository](https://github.com/dkirby-ms/jsdrop_kaito). From the shell, run the following commands to create an Azure resource group and begin a deployment of AKS using a Bicep template.
+Open a Bash shell where you cloned the [GitHub repository](https://github.com/dkirby-ms/jsdrop_kaito). From the shell, run the following commands to create an Azure resource group and begin a deployment of AKS using a Bicep template.
 
     ```
     az group create -n JumpstartKAITO -l eastus2
