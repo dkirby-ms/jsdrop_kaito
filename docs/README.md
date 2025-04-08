@@ -21,15 +21,11 @@ In this guide we will use an AKS cluster to simulate an on-premises cluster with
 
 Open a Bash shell where you cloned the [GitHub repository](https://github.com/dkirby-ms/jsdrop_kaito). From the shell, run the following commands to create an Azure resource group and begin a deployment of AKS using a Bicep template.
 
-    ```
     az group create -n JumpstartKAITO -l eastus2
-    ```
 
-    ![Az Group create screenshot](create_group.png)
+![Az Group create screenshot](create_group.png)
 
-    ```
     az deployment group create -g JumpstartKAITO -f infra/aks.bicep
-    ```
 
 ### Step 2: Deploying KAITO
 
