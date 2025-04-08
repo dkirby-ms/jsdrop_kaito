@@ -21,13 +21,13 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:0.8.3
     agentPools: [
       {
         name: 'gpupool'
-        count: 2
+        count: 1
         mode: 'User'
         vmSize: 'Standard_NC12s_v3'  // GPU-enabled VM size
         osDiskSizeGB: 128
         osType: 'Linux'
         maxPods: 110
-        maxCount: 2
+        maxCount: 1
         // Added availability set configuration for GPU pool
       }
     ]
