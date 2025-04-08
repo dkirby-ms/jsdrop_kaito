@@ -2,7 +2,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:0.8.3
   name: 'managedClusterDeployment'
   params: {
     // Required parameters
-    name: 'controlplane'
+    name: 'JumpstartAKS'
     primaryAgentPoolProfiles: [
       {
         count: 3
@@ -14,13 +14,10 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:0.8.3
       }
     ]
     // Non-required parameters
-    aadProfile: {
-      aadProfileEnableAzureRBAC: true
-      aadProfileManaged: true
-    }
     managedIdentities: {
       systemAssigned: true
     }
+    disableLocalAccounts: false
     agentPools: [
       {
         name: 'gpupool'
