@@ -9,8 +9,6 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:0.8.3
         mode: 'System'
         name: 'systempool'
         vmSize: 'Standard_DS4_v2'
-        // Removed availabilityZones and added availabilitySet
-
       }
     ]
     // Non-required parameters
@@ -27,8 +25,6 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:0.8.3
         osDiskSizeGB: 128
         osType: 'Linux'
         maxPods: 110
-        maxCount: 1
-        // Added availability set configuration for GPU pool
       }
     ]
   }
