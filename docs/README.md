@@ -25,8 +25,6 @@ Open a Bash shell where you cloned the [GitHub repository](https://github.com/dk
 
     az deployment group create -g JumpstartKAITO -f infra/aks.bicep
 
-![Deployment screenshot](./deploy.png)
-
 Once the deployment completes, continue to the next step.
 
 ### Step 2: Arc-enable the cluster
@@ -40,7 +38,7 @@ Running this script requires an interactive login with Azure so login when promp
 
 ### Step 3: Deploy KAITO and a falcon-7b-instruct model and ask a question
 
-Next, open a new shell.  we will run the install_kaito.sh script deploy KAITO and ask an LLM a question.
+Next, open a new shell. Run the install_kaito.sh script deploy KAITO and ask an LLM a question.
 
     chmod 700 ./infra/scripts/install_kaito.sh
     ./infra/scripts/install_kaito.sh
