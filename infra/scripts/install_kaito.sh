@@ -6,29 +6,29 @@ export GPU_NODE_POOL_NAME="gpupool"
 export namespace="kaito-workspace"
 export GPU_NODE_SIZE="Standard_NC12s_v3"
 
-# # # Prep cluster for GPU operator
-# kubectl create ns gpu-operator
-# kubectl label --overwrite ns gpu-operator pod-security.kubernetes.io/enforce=privileged
+# # Prep cluster for GPU operator
+kubectl create ns gpu-operator
+kubectl label --overwrite ns gpu-operator pod-security.kubernetes.io/enforce=privileged
 
-# # # Install GPU operator
-# helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
-# helm repo update
+# # Install GPU operator
+helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
+helm repo update
 
-# helm install \
-#     --wait \
-#     --generate-name \
-#     -n gpu-operator \
-#     --create-namespace \
-#     nvidia/gpu-operator
+helm install \
+    --wait \
+    --generate-name \
+    -n gpu-operator \
+    --create-namespace \
+    nvidia/gpu-operator
 
-# # Check if GPU operator is running
-# kubectl -n gpu-operator wait pod \
-#     --for=condition=Ready \
-#     -l app.kubernetes.io/component=gpu-operator \
-#     --timeout=300s
+# Check if GPU operator is running
+kubectl -n gpu-operator wait pod \
+    --for=condition=Ready \
+    -l app.kubernetes.io/component=gpu-operator \
+    --timeout=300s
 
-# # Check for Nvidia runtimeclass
-# kubectl get runtimeclass nvidia
+# Check for Nvidia runtimeclass
+kubectl get runtimeclass nvidia
 
 # Label the GPU nodes
 kubectl get nodes \
