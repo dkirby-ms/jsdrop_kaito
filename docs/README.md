@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This guide provides a quick way to explore KAITO enabled by Azure Arc. The guide includes a optional Bicep template for setting up an Arc-enabled cluster with a GPU node by using AKS. You can also use your own Kubernetes cluster and GPU if desired with some modifications to the script.
+This guide provides a quick way to explore KAITO enabled by Azure Arc. The guide includes a optional Bicep template for setting up an Arc-enabled cluster with a GPU node by using AKS. You can also use your own Kubernetes cluster and GPU if desired with some modifications to the script. You can see a quick demo of the results of the script in [this video](https://www.youtube.com/watch?v=Kef9WFyCeQA).
 
 ## Prerequisites
 
