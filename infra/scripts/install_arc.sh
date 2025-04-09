@@ -1,6 +1,6 @@
 #!/bin/bash
 export clusterName="JumpstartAKS"
-export resourceGroupName="JumpstartKaito"
+export resourceGroupName="Jumpstart-Kaito"
 
 # Login to Azure and get kubeconfig for the AKS cluster
 az login

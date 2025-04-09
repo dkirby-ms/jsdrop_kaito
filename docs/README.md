@@ -15,28 +15,32 @@ Before you begin, ensure you have the following:
 
 ## Step-by-Step Guide
 
-### Step 1 (Optional): Setting Up an Arc-connected Kubernetes environment with GPU
+### Step 1 (required if not bringing your own Kubernetes): Deploy a Kubernetes environment with GPU
 
 Setup an AKS cluster to simulate an on-premises cluster and GPU. For this Bicep template, you will need Compute quota for 24 Standard_NCSv3 series vCPU. The script was tested with East US and East US 2.
 
 Open a Bash shell where you cloned the [GitHub repository](https://github.com/dkirby-ms/jsdrop_kaito). From the shell, run the following commands to create an Azure resource group and begin a deployment of AKS using a Bicep template.
 
-    az group create -n JumpstartKAITO -l eastus2
+    az group create -n Jumpstart-KAITO -l eastus2
 
     az deployment group create -g JumpstartKAITO -f infra/aks.bicep
+
+![Deployment screenshot](./deploy.png)
 
 Once the deployment completes, continue to the next step.
 
 ### Step 2: Arc-enable the cluster
 
-After the cluster is deployed, run the _infra/scripts/install_arc.sh_ script from the same shell.
+After the cluster is deployed, edit the _infra/scripts/install_arc.sh_ script to adjust the Azure resource group name to match the one you used in your deployment.
 
     chmod 700 ./infra/scripts/install_arc.sh
     ./infra/scripts/install_arc.sh
 
+Running this script requires an interactive login with Azure so login when prompted. After logging in, the script will onboard your cluster as an Arc-enabled cluster and then open a proxy connection to the remote cluster using the cluster connect feature of Arc-enabled Kubernetes. Leave this connection open and do not press Ctrl-C until finished with the exercise.
+
 ### Step 3: Deploy KAITO and a falcon-7b-instruct model and ask a question
 
-Next we will run the install_kaito.sh script deploy KAITO and ask an LLM a question.
+Next, open a new shell.  we will run the install_kaito.sh script deploy KAITO and ask an LLM a question.
 
     chmod 700 ./infra/scripts/install_kaito.sh
     ./infra/scripts/install_kaito.sh
