@@ -23,11 +23,7 @@ Open a Bash shell where you cloned the [GitHub repository](https://github.com/dk
 
     az group create -n JumpstartKAITO -l eastus2
 
-![Az Group create screenshot](create_group.png)
-
     az deployment group create -g JumpstartKAITO -f infra/aks.bicep
-
-![Az deployment create screenshot](create_deployment.jpg)
 
 ### Step 2: Deploying KAITO
 
