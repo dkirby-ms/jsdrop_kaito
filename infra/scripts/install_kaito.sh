@@ -1,20 +1,17 @@
 #!/bin/bash
-export clusterName="kaitotest"
-export resourceGroupName="kaito"
+export clusterName="JumpstartAKS"
+export resourceGroupName="JumpstartKaito"
 export KAITO_WORKSPACE_VERSION=0.4.4
 export GPU_NODE_POOL_NAME="gpupool"
 export namespace="kaito-workspace"
 export GPU_NODE_SIZE="Standard_NC12s_v3"
 
-# Prerequisite: We are starting with a pre-existing AKS cluster that has a GPU node pool of at least 2 nodes of NC12v3 SKU. This can be deployed using the included Bicep template.
+# AAD_ENTITY_ID=$(az ad signed-in-user show --query id -o tsv)
+# kubectl create clusterrolebinding demo-user-binding --clusterrole cluster-admin --user=$AAD_ENTITY_ID
 
-# Login to Azure and get kubeconfig for the AKS cluster
-az login
-az aks get-credentials --name $clusterName --resource-group $resourceGroupName --overwrite-existing
-
-# Prep cluster for GPU operator
-kubectl create ns gpu-operator
-kubectl label --overwrite ns gpu-operator pod-security.kubernetes.io/enforce=privileged
+# # Prep cluster for GPU operator
+# kubectl create ns gpu-operator
+# kubectl label --overwrite ns gpu-operator pod-security.kubernetes.io/enforce=privileged
 
 # # Install GPU operator
 # helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
@@ -34,7 +31,7 @@ kubectl label --overwrite ns gpu-operator pod-security.kubernetes.io/enforce=pri
 #     --timeout=300s
 
 # Check for Nvidia runtimeclass
-kubectl get runtimeclass nvidia
+# kubectl get runtimeclass nvidia
 
 # Label the GPU nodes
 kubectl get nodes \
@@ -60,34 +57,34 @@ cat <<EOF | kubectl apply -f -
 apiVersion: kaito.sh/v1alpha1
 kind: Workspace
 metadata:
-  name: workspace-phi-3-5-mini
+  name: workspace-falcon-7b-instruct
 resource:
-  instanceType: "Standard_NC12s_v3"
+  instanceType: $GPU_NODE_SIZE
   labelSelector:
     matchLabels:
       apps: $GPU_NODE_POOL_NAME
 inference:
   preset:
-    name: phi-3.5-mini-instruct
+    name: "falcon-7b-instruct"
 EOF
 
+
 # Check if the workspace is ready for inference
-kubectl get workspace workspace-phi-3-5-mini
+kubectl get workspace workspace-falcon-7b-instruct
 
 # Get the cluster IP to send a request to the inference service
 export CLUSTERIP=$(kubectl get \
-    svc workspace-falcon-7b \
+    svc workspace-falcon-7b-instruct \
     -o jsonpath="{.spec.clusterIPs[0]}")
 
 # Ask the LLM a question
-#export QUESTION="What is Arc Jumpstart?"
-
-
+export QUESTION="What is Arc Jumpstart?"
 kubectl run -it --rm --restart=Never curl --image=curlimages/curl -- curl -X POST http://$CLUSTERIP/v1/completions \
   -H "Content-Type: application/json" \
-  -d '{
-    "model": "phi-3.5-mini-instruct",
-    "prompt": "What is Azure Arc?",
+  -d "{
+    "model": "falcon-7b-instruct",
+    "input": "What is fart?",
+    "prompt": $QUESTION,
     "max_tokens": 20,
     "temperature": 0
-  }'
+  }"
