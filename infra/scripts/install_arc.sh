@@ -1,10 +1,6 @@
 #!/bin/bash
 export clusterName="JumpstartAKS"
 export resourceGroupName="JumpstartKaito"
-export KAITO_WORKSPACE_VERSION=0.4.4
-export GPU_NODE_POOL_NAME="gpupool"
-export namespace="kaito-workspace"
-export GPU_NODE_SIZE="Standard_NC12s_v3"
 
 # Login to Azure and get kubeconfig for the AKS cluster
 az login
